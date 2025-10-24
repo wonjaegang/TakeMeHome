@@ -1,0 +1,30 @@
+{
+  "chapterTitle": "Chapter 1: Beginner Roads",
+  "chapterNumber": 1,
+  "levels": [
+    {
+      "levelId": 1,
+      "roadDirection": ["up", "up", "up"],
+      "carLocation": [0, 1, 2],
+      "homeLocation": [1, 2, 0],
+      "bridgeState": [
+        [0, 0, 0, 0, 1, 0, 0, 0, 0],
+        [0, 0, 0, 0, 1, 0, 2, 0, 0],
+        [0, 0, 0, 0, 0, 0, 2, 0, 0]
+      ],
+      "bridgeType": ["normal", "normal"]
+    },
+    {
+      "levelId": 2,
+      "roadDirection": ["up", "up", "down"],
+      "carLocation": [1, 0, 2],
+      "carLocation": [2, 0, 1],
+      "bridgeState": [
+        [0, 1, 0, 0, 0, 0, 2, 0, 0],
+        [0, 1, 0, 0, 0, 0, 2, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0]
+      ],
+      "bridgeType": ["normal", "normal"]
+    }
+  ]
+}
