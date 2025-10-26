@@ -11,8 +11,8 @@
         { "start": 2, "goal": 0 },
       ],
       "crossway": [
-        { "connectedRoad": [0, 1], "position": 2 },
-        { "connectedRoad": [1, 2], "position": 10 },
+        { "connectedRoad": [0, 1], "point": 2 },
+        { "connectedRoad": [1, 2], "point": 10 },
       ]
     },
     {
@@ -24,9 +24,9 @@
         { "start": 2, "goal": 0 },
       ],
       "crossway": [
-        { "connectedRoad": [0, 1], "position": 4 },
-        { "connectedRoad": [0, 1], "position": 2 },
-        { "connectedRoad": [1, 2], "position": 10 },
+        { "connectedRoad": [0, 1], "point": 4 },
+        { "connectedRoad": [0, 1], "point": 2 },
+        { "connectedRoad": [1, 2], "point": 10 },
       ]
     },
   ]

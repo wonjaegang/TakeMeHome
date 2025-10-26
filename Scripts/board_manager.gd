@@ -1,17 +1,25 @@
 extends Control
 class_name BoardManager
 
-# 현재 레벨 정
-var currentChapter = 1
-var currentLevel = 1
+## 책임:
+##  - 게임보드의 시작 및 종료를 관리
+
+# 현재 레벨 정보
+var _chapter: int = 1
+var _level: int = 1
 
 # 현재 보드 정보
-var cars = []
-var roads = []
-var crossways = []
+var _roads: Array[Road] = []
+var _crossways: Array[Crossway] = []
+var _cars: Array[Car] = []
+var _homes: Array[Home] = []
 
-func _ready():
-    var jsonDict = _loadLevelData("res://Config/chapter%d.json" % currentChapter)
+func _init(chapter: int, level: int) -> void:
+    _chapter = chapter
+    _level = level
+
+func _ready() -> void:
+    var jsonDict = _loadLevelData("res://Config/chapter%d.json" % _chapter)
     _createBoard(jsonDict)
     
 func _loadLevelData(file_path: String) -> Dictionary:
