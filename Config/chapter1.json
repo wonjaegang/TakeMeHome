@@ -4,27 +4,30 @@
   "levels": [
     {
       "levelId": 1,
-      "roadDirection": ["up", "up", "up"],
-      "carLocation": [0, 1, 2],
-      "homeLocation": [1, 2, 0],
-      "bridgeState": [
-        [0, 0, 0, 0, 1, 0, 0, 0, 0],
-        [0, 0, 0, 0, 1, 0, 2, 0, 0],
-        [0, 0, 0, 0, 0, 0, 2, 0, 0]
+      "road": ["down", "down", "down", ],
+      "car": [
+        { "start": 0, "goal": 2 },
+        { "start": 1, "goal": 1 },
+        { "start": 2, "goal": 0 },
       ],
-      "bridgeType": ["normal", "normal"]
+      "crossway": [
+        { "connectedRoad": [0, 1], "position": 2 },
+        { "connectedRoad": [1, 2], "position": 10 },
+      ]
     },
     {
       "levelId": 2,
-      "roadDirection": ["up", "up", "down"],
-      "carLocation": [1, 0, 2],
-      "carLocation": [2, 0, 1],
-      "bridgeState": [
-        [0, 1, 0, 0, 0, 0, 2, 0, 0],
-        [0, 1, 0, 0, 0, 0, 2, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0]
+      "road": ["down", "down", "up"],
+      "car": [
+        { "start": 0, "goal": 2 },
+        { "start": 1, "goal": 1 },
+        { "start": 2, "goal": 0 },
       ],
-      "bridgeType": ["normal", "normal"]
-    }
+      "crossway": [
+        { "connectedRoad": [0, 1], "position": 4 },
+        { "connectedRoad": [0, 1], "position": 2 },
+        { "connectedRoad": [1, 2], "position": 10 },
+      ]
+    },
   ]
 }
