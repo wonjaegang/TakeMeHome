@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://jbcxcqyifvxm"]
+
+[ext_resource type="Script" uid="uid://kyrdy8m27crk" path="res://Scripts/road.gd" id="1_6xmvt"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_5v6ho"]
+size = Vector3(40, 800, 40)
+
+[node name="Road2D" type="Node2D"]
+script = ExtResource("1_6xmvt")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+mesh = SubResource("BoxMesh_5v6ho")

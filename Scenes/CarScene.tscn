@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://p2f5vm1yu7tc"]
+
+[ext_resource type="Script" uid="uid://imyke7ch481o" path="res://Scripts/car.gd" id="1_rgxa4"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_rgxa4"]
+size = Vector3(20, 30, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1nr1l"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rgxa4"]
+size = Vector2(25, 14)
+
+[node name="Car2D" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_rgxa4")
+
+[node name="mesh" type="MeshInstance2D" parent="."]
+modulate = Color(0.6976886, 0.57588524, 0.9722, 1)
+position = Vector2(0.25000095, 0)
+scale = Vector2(1.2750001, 0.4666667)
+mesh = SubResource("BoxMesh_rgxa4")
+
+[node name="mesh2" type="MeshInstance2D" parent="."]
+modulate = Color(0.69803923, 0.5764706, 0.972549, 1)
+position = Vector2(16, 0)
+scale = Vector2(5.7500005, 4.2499986)
+mesh = SubResource("BoxMesh_1nr1l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_rgxa4")

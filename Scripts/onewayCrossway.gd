@@ -1,7 +1,5 @@
-extends Node
-class_name Home
-
-## 책임:
+extends Crossway
+class_name OnewayCrossway
 
 func _ready() -> void:
     pass # Replace with function body.

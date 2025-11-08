@@ -1,0 +1,80 @@
+extends Control
+class_name LevelLoader
+
+## 책임:
+##  - 게임보드의 요소들 생성
+
+const VIEW_X :int = 720
+const VIEW_Y :int = 1280
+const SIDE_MARGIN_X : int = 100
+const UPPER_MARGIN_Y : int = 50
+const ROAD_LEN : int = 800
+const ROAD_CENTER_CAR_GAP : int = 450
+
+var _carScene : PackedScene = load("res://Scenes/CarScene.tscn")
+var _roadScene : PackedScene = load("res://Scenes/RoadScene.tscn")
+#var carScene : PackedScene = load("res://Scenes/CarScene.tscn")
+
+var _levelData : Dictionary = {}
+
+func _ready() -> void:    
+    _createBoard(1, 2)
+    
+func _createBoard(chapter: int, level: int) -> void:
+    _loadLevelData(chapter, level)
+    _createRoads()
+    _createCars()
+        
+func _loadLevelData(chapter: int, level: int) -> void:
+    var file_path : String = "res://Config/chapter%d.json" % chapter
+    var file = FileAccess.open(file_path, FileAccess.READ)
+    if not file:
+        push_error("❌ JSON 파일을 열 수 없음: %s" % file_path)
+        return
+  
+    var content = file.get_as_text()
+    file.close()
+
+    var json = JSON.new()
+    var result = json.parse(content)
+    if result != OK:
+        push_error("❌ JSON 파싱 실패: %s" % file_path)
+        return
+
+    _levelData = json.get_data().get('levelData')[level - 1]
+
+func _createRoads() -> void:
+    var roadDirections : Array = _levelData.get('road') 
+    for index in range(len(roadDirections)):
+        var road: Road = _roadScene.instantiate()
+        road.setDirection(roadDirections[index])
+        
+        @warning_ignore("integer_division")
+        var roadGap: int = (VIEW_X - SIDE_MARGIN_X * 2) / (len(roadDirections) + 1)
+        
+        @warning_ignore("integer_division")
+        road.position = Vector2(SIDE_MARGIN_X + (index + 1) * roadGap, VIEW_Y / 2 - UPPER_MARGIN_Y)
+        get_node('../Roads').add_child(road)
+
+func _createCars() -> void:
+    var carPath : Array = _levelData.get('car')
+    for index in range(len(carPath)):
+        var car: Car = _carScene.instantiate()
+        var startRoadIndex: int = carPath[index].get('start')
+        var startRoad :Road = get_node('../Roads').get_child(startRoadIndex)
+        
+        var carPosY : int
+        var carRotation : float
+        if startRoad.getDirection() == Road.Direction.DOWN:
+            carPosY = startRoad.position.y - ROAD_CENTER_CAR_GAP
+            carRotation = PI / 2
+        elif startRoad.getDirection() == Road.Direction.UP:
+            carPosY = startRoad.position.y + ROAD_CENTER_CAR_GAP
+            carRotation = -PI / 2
+        else:
+            push_error("UP/DOWN 외의 방향이 입력됨")
+            
+        car.position = Vector2(startRoad.position.x, carPosY)
+        car.rotation = carRotation
+        get_node('../Cars').add_child(car)
+        

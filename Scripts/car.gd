@@ -1,30 +1,42 @@
-extends Node
+extends CharacterBody2D
 class_name Car
 
 ## 책임:
-##  - 차량의 현재 위치, 목적지 및 이동을 관리
-##  - Crossway에 도달했을 때 이동요청
+##  - 차량의 이동 관리
 
-const SPEED: float = 1.0 
-var _currentRoad: Road
-var _currentPoint: int
-var _home: Home
-var _arrived: bool = false
+const SPEED: float = 30.0
+var _isDriving : bool = false
+var _isTurning : bool = false
+var _angularSpeed : float = 0
+var _targetAngle : float = 0
 
-func _init(startRoad: Road, home:Home) -> void:
-    _currentRoad = startRoad
-    _currentPoint = 0 if startRoad.getDirection() == Road.Direction.DOWN else Road.TOTAL_POINT
-    _home = home
-    
 func _ready() -> void:
-    pass # Replace with function body.
-
-func getCurrentRoad() -> Road:
-    return _currentRoad   
-    
-func getCurrentPosition() -> int:
-    return _currentPoint 
-
-func setNextLocation() -> void:
     pass
-  
+
+func _physics_process(delta: float) -> void:
+    if not _isDriving:
+        return
+    
+    if _isTurning:
+        _rotate(delta)
+        
+    _moveForward(delta)
+
+func startCar() -> void:
+    _isDriving = true
+
+func setCurve(angle: float, radius: float) -> void:
+    _isTurning = true
+    _targetAngle = rotation + angle
+    _angularSpeed = SPEED / radius * sign(angle)
+
+func _rotate(delta: float) -> void:
+    rotation += _angularSpeed * delta
+    if abs(rotation - _targetAngle) < 0.01:
+        rotation = _targetAngle
+        _isTurning = false
+
+func _moveForward(delta: float) -> void:
+    position += Vector2.RIGHT.rotated(rotation) * SPEED * delta
+        
+    

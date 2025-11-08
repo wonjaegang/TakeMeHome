@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dfxtn4mbqs318"]
+
+[ext_resource type="Script" uid="uid://drptvj57ywhnl" path="res://Scripts/home.gd" id="1_mmdh1"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_mmdh1"]
+radius = 20.0
+height = 40.0
+
+[node name="Home2D" type="Node2D"]
+script = ExtResource("1_mmdh1")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+mesh = SubResource("CapsuleMesh_mmdh1")

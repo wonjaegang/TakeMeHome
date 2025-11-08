@@ -1,7 +1,7 @@
 {
   "chapterTitle": "Chapter 1: Beginner Roads",
   "chapterNumber": 1,
-  "levels": [
+  "levelData": [
     {
       "levelId": 1,
       "road": ["down", "down", "down", ],
