@@ -1,9 +1,8 @@
-extends Node
+extends Node2D
 class_name Road
 
 ## 책임:
 ## - 도로의 방향 저장
-## - 각 포인트에 연결된 crossway 조회
 
 enum Direction {
     UP,
@@ -20,4 +19,3 @@ func setDirection(direction: String) -> void:
     
 func getDirection() -> Direction:
     return _direction
-    

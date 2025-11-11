@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=4 uid="uid://kl5yxxly6ink"]
+
+[ext_resource type="Script" uid="uid://b4mhsl4q25c5o" path="res://Scripts/crossway.gd" id="1_qcomx"]
+[ext_resource type="TileSet" uid="uid://ddypvtmswt5uv" path="res://Resources/kenney_rpg-urban-pack/UrbanTileMap16.tres" id="1_utbm6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_utbm6"]
+size = Vector2(160, 31.875)
+
+[node name="Crossway2D" type="Node2D"]
+script = ExtResource("1_qcomx")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAD7/wAAAgABABEAAAD8/wAAAgABABEAAAD9/wAAAgABABEAAAD+/wAAAgABABEAAAD//wAAAgABABEAAAAAAAAAAgABABEAAAABAAAAAgABABEAAAACAAAAAgABABEAAAADAAAAAgABABEAAAAEAAAAAgABABEAAAD7////AgABAA8AAAD8////AgABAA8AAAD9////AgABAA8AAAD+////AgABAA8AAAD/////AgABAA8AAAAAAP//AgABAA8AAAADAP//AgABAA8AAAAEAP//AgABAA8AAAABAP//AgABAA8AAAACAP//AgABAA8AAAA=")
+tile_set = ExtResource("1_utbm6")
+
+[node name="CarEnterArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CarEnterArea"]
+position = Vector2(0, 0.0625)
+shape = SubResource("RectangleShape2D_utbm6")

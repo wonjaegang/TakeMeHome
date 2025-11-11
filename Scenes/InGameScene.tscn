@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cgs0b3qaeymtw"]
+[gd_scene load_steps=6 format=3 uid="uid://cgs0b3qaeymtw"]
 
 [ext_resource type="Script" uid="uid://c5u2rcmjn5c7o" path="res://Scripts/levelLoader.gd" id="1_rq0h7"]
 [ext_resource type="Script" uid="uid://pgrdk73sd1oy" path="res://Scripts/playButton.gd" id="2_rq0h7"]
 [ext_resource type="Script" uid="uid://cv4gvw2o4kseq" path="res://Scripts/signalBus.gd" id="3_7o33y"]
 [ext_resource type="Script" uid="uid://diwhtr2e5tol0" path="res://Scripts/resetButton.gd" id="3_482gy"]
+[ext_resource type="PackedScene" uid="uid://kl5yxxly6ink" path="res://Scenes/CrosswayScene.tscn" id="5_locge"]
 
 [node name="InGame" type="Node2D"]
 
@@ -12,6 +13,11 @@ offset_right = 720.0
 offset_bottom = 1280.0
 
 [node name="Roads" type="Node2D" parent="."]
+
+[node name="Crossways" type="Node2D" parent="."]
+
+[node name="Crossway2D" parent="Crossways" instance=ExtResource("5_locge")]
+position = Vector2(420, 806)
 
 [node name="Cars" type="Node2D" parent="."]
 
@@ -44,6 +50,4 @@ script = ExtResource("3_482gy")
 [node name="SignalBus" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
 script = ExtResource("3_7o33y")

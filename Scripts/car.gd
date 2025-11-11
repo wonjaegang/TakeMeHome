@@ -4,7 +4,7 @@ class_name Car
 ## 책임:
 ##  - 차량의 이동 관리
 
-const SPEED: float = 30.0
+const SPEED: float = 100.0
 var _isDriving : bool = false
 var _isTurning : bool = false
 var _angularSpeed : float = 0
@@ -25,14 +25,14 @@ func _physics_process(delta: float) -> void:
 func startCar() -> void:
     _isDriving = true
 
-func setCurve(angle: float, radius: float) -> void:
+func _setCurve(angle: float, radius: float) -> void:
     _isTurning = true
     _targetAngle = rotation + angle
     _angularSpeed = SPEED / radius * sign(angle)
 
 func _rotate(delta: float) -> void:
     rotation += _angularSpeed * delta
-    if abs(rotation - _targetAngle) < 0.01:
+    if (_targetAngle - rotation) * sign(_angularSpeed) <= 0:
         rotation = _targetAngle
         _isTurning = false
 

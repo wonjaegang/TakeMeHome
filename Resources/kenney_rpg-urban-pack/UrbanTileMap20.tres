@@ -1,0 +1,17 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://bwidhqtgv6ma"]
+
+[ext_resource type="Texture2D" uid="uid://dnfxvfjokcpu0" path="res://Resources/kenney_rpg-urban-pack/Tilemap/tilemap_packed.png" id="1_n0q8u"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p47og"]
+texture = ExtResource("1_n0q8u")
+margins = Vector2i(4, 0)
+texture_region_size = Vector2i(24, 24)
+6:11/0 = 0
+8:11/0 = 0
+10:11/0 = 0
+11:11/0 = 0
+12:11/0 = 0
+13:11/0 = 0
+
+[resource]
+sources/0 = SubResource("TileSetAtlasSource_p47og")
