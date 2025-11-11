@@ -11,7 +11,8 @@ var _angularSpeed : float = 0
 var _targetAngle : float = 0
 
 func _ready() -> void:
-    pass
+    SignalBus.start_driving.connect(_startCar)
+    SignalBus.make_enteredCar_turn.connect(_makeCarTurn)
 
 func _physics_process(delta: float) -> void:
     if not _isDriving:
@@ -22,10 +23,12 @@ func _physics_process(delta: float) -> void:
         
     _moveForward(delta)
 
-func startCar() -> void:
+func _startCar() -> void:
     _isDriving = true
 
-func _setCurve(angle: float, radius: float) -> void:
+func _makeCarTurn(car: Car, angle: float, radius: float) -> void:
+    if car != self:
+        return
     _isTurning = true
     _targetAngle = rotation + angle
     _angularSpeed = SPEED / radius * sign(angle)

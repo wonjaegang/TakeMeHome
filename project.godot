@@ -15,6 +15,10 @@ run/main_scene="uid://cgs0b3qaeymtw"
 config/features=PackedStringArray("4.5", "Mobile")
 config/icon="res://icon.svg"
 
+[autoload]
+
+SignalBus="*res://Scripts/signalBus.gd"
+
 [display]
 
 window/size/viewport_width=720
