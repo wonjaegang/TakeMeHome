@@ -7,6 +7,7 @@ class_name Car
 const SPEED: float = 100.0
 var _isDriving : bool = false
 var _isTurning : bool = false
+var _has_enterd_road : bool = false
 var _angularSpeed : float = 0
 var _targetAngle : float = 0
 
@@ -41,5 +42,11 @@ func _rotate(delta: float) -> void:
 
 func _moveForward(delta: float) -> void:
     position += Vector2.RIGHT.rotated(rotation) * SPEED * delta
+
+func getHasEnteredRoad() -> bool:
+    return _has_enterd_road
+    
+func setHasEnteredRoad(flag: bool) -> void:
+    _has_enterd_road = flag
         
     
