@@ -12,8 +12,8 @@ func _on_body_entered(body: Node2D) -> void:
         return
     
     var car: Car = body    
-    var angle: float = car.position.x - position.x
-    var radius: float = 30
+    var angle: float
+    var radius: float = 25
     
     var dPos: Vector2 = car.position - position
     if dPos.x >= 0 and dPos.y <= 0:

@@ -44,7 +44,9 @@ func _loadLevelData(chapter: int, level: int) -> void:
     _levelData = json.get_data().get('levelData')[level - 1]
 
 func _createRoads() -> void:
-    var roadDirections : Array = _levelData.get('road') 
+    var roadTileGapByRoadNum: Dictionary = {2: 12, 3: 10, 4: 8}
+    
+    var roadDirections : Array = _levelData.get('road')
     for index in range(len(roadDirections)):
         var road: Road = _roadScene.instantiate()
         road.setDirection(roadDirections[index])
@@ -63,7 +65,7 @@ func _createCars() -> void:
         var startRoadIndex: int = carPath[index].get('start')
         var startRoad :Road = get_node('../Roads').get_child(startRoadIndex)
         
-        var carPosY : int
+        var carPosY : float
         var carRotation : float
         if startRoad.getDirection() == Road.Direction.DOWN:
             carPosY = startRoad.position.y - ROAD_CENTER_CAR_GAP
