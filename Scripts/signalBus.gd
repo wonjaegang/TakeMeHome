@@ -6,7 +6,9 @@ extends Control
 
 ## 시그널 정의
 # 차량 이동
+@warning_ignore("unused_signal")
 signal start_driving
+@warning_ignore("unused_signal")
 signal make_enteredCar_turn(car: Car, angle:float, radius:float)
 
 # Called when the node enters the scene tree for the first time.

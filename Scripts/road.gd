@@ -9,22 +9,13 @@ enum Direction {
     UP,
     DOWN,
 }
-const TOTAL_POINT: int = 12  # Crossway를 만들 수 있는 총 point 수
 var _direction: Direction
     
 func _ready() -> void:
     $CarEnterArea.body_entered.connect(_on_body_entered) # Replace with function body.      
 
 func setDirection(direction: String) -> void:
-    if direction == "up":
-        _direction = Direction.UP
-        rotation = PI
-    elif direction == "down":
-        _direction = Direction.DOWN
-        rotation = 0
-    else:       
-        push_error("UP/DOWN 외의 방향이 입력됨")
-    print(rotation)
+    _direction = Direction.UP if direction == "up" else Direction.DOWN
     
 func getDirection() -> Direction:
     return _direction
