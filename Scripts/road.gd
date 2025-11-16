@@ -30,9 +30,10 @@ func _on_body_entered(body: Node2D) -> void:
         return
        
     var angle: float
-    var radius: float = 25
+    var radius: float
     
     var dPos: Vector2 = car.position - position
+    radius = abs(dPos.x)
     if dPos.x >= 0 and _direction == Direction.UP:
         angle = PI / 2
     elif dPos.x >= 0 and _direction == Direction.DOWN:

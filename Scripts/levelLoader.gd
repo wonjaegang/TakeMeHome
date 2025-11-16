@@ -20,7 +20,7 @@ var _crosswayScene : PackedScene = load("res://Scenes/CrosswayScene.tscn")
 var _levelData : Dictionary = {}
 
 func _ready() -> void:    
-    _createBoard(1, 1)
+    _createBoard(1, 2)
     
 func _createBoard(chapter: int, level: int) -> void:
     _loadLevelData(chapter, level)
@@ -64,12 +64,21 @@ func _createRoads() -> void:
         get_node('../Roads').add_child(road)
 
 func _createCrossways() -> void:
-    for leftRoad: Road in get_node('../Roads').get_children().slice(0, -1):
+    var crosswayInfos : Array = _levelData.get('crossway')
+        
+    for leftRoadIdx in range(get_node('../Roads').get_child_count() - 1):
+        var leftRoad: Road = get_node('../Roads').get_child(leftRoadIdx)
+        
         for crosswayPointIdx in range(CROSSWAY_POINT_NUM):
             var crossway: Crossway = _crosswayScene.instantiate()
             var crosswayPosX = leftRoad.position.x + ROAD_INTERVAL_X / 2
             var crosswayPosY = leftRoad.position.y - (CROSSWAY_POINT_NUM - 1) * CROSSWAY_INTERVAL_Y / 2 + crosswayPointIdx * CROSSWAY_INTERVAL_Y
             crossway.position = Vector2(crosswayPosX, crosswayPosY)
+            crossway.deactivate()
+            
+            for crosswayInfo: Dictionary in crosswayInfos:
+                if crosswayInfo['connectedRoad'][0] == leftRoadIdx and crosswayInfo['point'] == crosswayPointIdx:
+                    crossway.showLevelCrossway()
             
             get_node('../Crossways').add_child(crossway)
     

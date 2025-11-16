@@ -4,7 +4,7 @@ class_name Car
 ## 책임:
 ##  - 차량의 이동 관리
 
-const SPEED: float = 150.0
+const SPEED: float = 200.0
 var _isDriving : bool = false
 var _isTurning : bool = false
 var _has_enterd_road : bool = false
