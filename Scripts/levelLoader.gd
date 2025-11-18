@@ -78,7 +78,7 @@ func _createCrossways() -> void:
             
             for crosswayInfo: Dictionary in crosswayInfos:
                 if crosswayInfo['connectedRoad'][0] == leftRoadIdx and crosswayInfo['point'] == crosswayPointIdx:
-                    crossway.showLevelCrossway()
+                    crossway.activateBy(Crossway.originType.SYSTEM)
             
             get_node('../Crossways').add_child(crossway)
     

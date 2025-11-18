@@ -27,6 +27,10 @@ window/stretch/aspect="keep_width"
 window/stretch/scale=0.5
 window/handheld/orientation=1
 
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
+
 [rendering]
 
 renderer/rendering_method="mobile"

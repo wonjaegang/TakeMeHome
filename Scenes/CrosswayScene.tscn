@@ -2013,9 +2013,8 @@ tile_set = SubResource("TileSet_x3pnv")
 position = Vector2(0, 0.0625)
 shape = SubResource("RectangleShape2D_utbm6")
 
-[node name="TouchArea" type="Area2D" parent="."]
-z_index = 20
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TouchArea"]
-position = Vector2(0, 0.0625)
-shape = SubResource("RectangleShape2D_utbm6")
+[node name="TouchButton" type="TextureButton" parent="."]
+offset_left = -80.0
+offset_top = -16.0
+offset_right = 80.0
+offset_bottom = 16.0
