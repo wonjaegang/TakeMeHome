@@ -7,7 +7,7 @@ class_name LevelLoader
 const VIEW_X :float = 720
 const VIEW_Y :float = 1280
 const UPPER_OFFSET_Y : float = 50  # 보드의 중앙에서 위쪽 방향 오프셋
-const ROAD_INTERVAL_X : float = 128
+const ROAD_INTERVAL_X : float = 140
 const ROAD_LEN : float = 800
 const ROAD_CENTER_CAR_GAP : float = 450
 const CROSSWAY_POINT_NUM: int = 12  # 한 road에 Crossway를 만들 수 있는 총 point 수
