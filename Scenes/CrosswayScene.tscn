@@ -1493,8 +1493,7 @@ tile_map_data = PackedByteArray("AAADAP//AgAJABAAAAADAAAAAgAJABEAAAD8/wAAAgAJABE
 tile_set = SubResource("TileSet_yme1q")
 
 [node name="CreatePoint" type="TileMapLayer" parent="TileMap"]
-visible = false
-tile_map_data = PackedByteArray("AAD8////AgARAAoAAAADAP//AgARAAoAAAADAP7/AgARAAgAAAD8//7/AgARAAgAAAA=")
+tile_map_data = PackedByteArray("AAD+////AgAAAAoAAAD/////AgAAAAoAAAAAAP//AgAAAAoAAAABAP//AgAAAAoAAAA=")
 tile_set = SubResource("TileSet_yme1q")
 
 [node name="LevelCrossway" type="TileMapLayer" parent="TileMap"]

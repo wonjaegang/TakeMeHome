@@ -7,9 +7,8 @@ class_name LevelLoader
 const VIEW_X :float = 720
 const VIEW_Y :float = 1280
 const UPPER_OFFSET_Y : float = 50  # 보드의 중앙에서 위쪽 방향 오프셋
-const ROAD_INTERVAL_X : float = 140
-const ROAD_LEN : float = 800
-const ROAD_CENTER_CAR_GAP : float = 450
+const ROAD_INTERVAL_X : float = 144
+const ROAD_CAR_GAP : float = 40
 const CROSSWAY_POINT_NUM: int = 12  # 한 road에 Crossway를 만들 수 있는 총 point 수
 const CROSSWAY_INTERVAL_Y : float = 64
 
@@ -91,11 +90,12 @@ func _createCars() -> void:
         
         var carPosY : float
         var carRotation : float
+        var roadHalfLength : float = startRoad.get_node('CarEnterArea/CollisionShape2D').shape.extents.y
         if startRoad.getDirection() == Road.Direction.DOWN:
-            carPosY = startRoad.position.y - ROAD_CENTER_CAR_GAP
+            carPosY = startRoad.position.y - (roadHalfLength + ROAD_CAR_GAP)
             carRotation = PI / 2
         elif startRoad.getDirection() == Road.Direction.UP:
-            carPosY = startRoad.position.y + ROAD_CENTER_CAR_GAP
+            carPosY = startRoad.position.y + (roadHalfLength + ROAD_CAR_GAP)
             carRotation = -PI / 2
         else:
             push_error('Unknown Direction')
