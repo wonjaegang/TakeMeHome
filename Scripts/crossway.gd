@@ -42,9 +42,10 @@ func deactivate() -> void:
     if _origin == originType.SYSTEM:
         return
     _origin = originType.NONE
-    $TileMap/CreatePoint.visible = true
+    $TileMap/SystemCrossway.visible = false
+    $TileMap/UserCrossway.visible = false
     $TileMap/RoadOverlap.visible = false
-    $TileMap/LevelCrossway.visible = false
+    $TileMap/CreatePoint.visible = true
     $CarEnterArea.monitoring = false
     $CarEnterArea.monitorable = false
 
@@ -52,9 +53,12 @@ func activateBy(origin: originType) -> void:
     if _origin != originType.NONE:
         return
     _origin = origin
-    $TileMap/CreatePoint.visible = false
+    if origin == originType.USER:
+        $TileMap/UserCrossway.visible = true
+    elif origin == originType.SYSTEM:        
+        $TileMap/SystemCrossway.visible = true    
     $TileMap/RoadOverlap.visible = true
-    $TileMap/LevelCrossway.visible = true
+    $TileMap/CreatePoint.visible = false
     $CarEnterArea.monitoring = true
     $CarEnterArea.monitorable = true
     
