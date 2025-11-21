@@ -1,30 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://p2f5vm1yu7tc"]
+[gd_scene load_steps=4 format=3 uid="uid://p2f5vm1yu7tc"]
 
 [ext_resource type="Script" uid="uid://imyke7ch481o" path="res://Scripts/car.gd" id="1_rgxa4"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_rgxa4"]
-size = Vector3(20, 30, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_1nr1l"]
+[ext_resource type="TileSet" uid="uid://bhsopyjv1t6xj" path="res://Resources/kenney_roguelike-modern-city/MordernCityTileMap16.tres" id="2_1nr1l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rgxa4"]
-size = Vector2(25, 14)
+size = Vector2(24, 18)
 
 [node name="Car2D" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_rgxa4")
 
-[node name="mesh" type="MeshInstance2D" parent="."]
-modulate = Color(0.6976886, 0.57588524, 0.9722, 1)
-position = Vector2(0.25000095, 0)
-scale = Vector2(1.2750001, 0.4666667)
-mesh = SubResource("BoxMesh_rgxa4")
-
-[node name="mesh2" type="MeshInstance2D" parent="."]
-modulate = Color(0.69803923, 0.5764706, 0.972549, 1)
-position = Vector2(16, 0)
-scale = Vector2(5.7500005, 4.2499986)
-mesh = SubResource("BoxMesh_1nr1l")
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray(0, 0, 0, 0, 255, 255, 1, 0, 34, 0, 19, 0, 0, 96, 0, 0, 0, 0, 1, 0, 33, 0, 19, 0, 0, 96, 255, 255, 0, 0, 1, 0, 33, 0, 18, 0, 0, 96, 255, 255, 255, 255, 1, 0, 34, 0, 18, 0, 0, 96)
+tile_set = ExtResource("2_1nr1l")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_rgxa4")
