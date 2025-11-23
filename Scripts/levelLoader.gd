@@ -73,9 +73,9 @@ func _createCrossways() -> void:
             var crosswayPosX = leftRoad.position.x + ROAD_INTERVAL_X / 2
             var crosswayPosY = leftRoad.position.y - (CROSSWAY_POINT_NUM - 1) * CROSSWAY_INTERVAL_Y / 2 + crosswayPointIdx * CROSSWAY_INTERVAL_Y
             crossway.position = Vector2(crosswayPosX, crosswayPosY)
-            crossway.deactivate()            
             get_node('../Crossways').add_child(crossway)
-            
+
+            crossway.deactivate()            
             for crosswayInfo: Dictionary in crosswayInfos:
                 if crosswayInfo['connectedRoad'][0] == leftRoadIdx and crosswayInfo['point'] == crosswayPointIdx:
                     crossway.activateBy(Crossway.originType.SYSTEM)
