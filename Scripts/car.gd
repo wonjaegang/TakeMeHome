@@ -24,6 +24,9 @@ func _ready() -> void:
 func setCarIndex(index: int) -> void:
     _carIndex = index
 
+func getCarIndex() -> int:
+    return _carIndex
+
 func setCarTexture(texture: Texture2D) -> void:
     if _sprite:
         _sprite.texture = texture
@@ -42,13 +45,10 @@ func _physics_process(delta: float) -> void:
 func _startCar() -> void:
     _isDriving = true
 
-func _on_car_arrived_home(car: Car, homeIndex: int) -> void:
+func _on_car_arrived_home(car: Car) -> void:
     if car != self:
         return
     
-    if homeIndex != _carIndex:
-        print("Car %d arrived at wrong home %d" % [_carIndex, homeIndex])
-
     _isDriving = false
     var tween = create_tween()
     tween.tween_property(self, "modulate:a", 0.0, CAR_DISAPPEAR_DURATION)

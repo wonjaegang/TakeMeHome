@@ -11,7 +11,7 @@ signal start_driving
 @warning_ignore("unused_signal")
 signal make_enteredCar_turn(car: Car, angle:float, radius:float)
 @warning_ignore("unused_signal")
-signal car_arrived_home(car: Car, homeIndex: int)
+signal car_arrived_home(car: Car)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

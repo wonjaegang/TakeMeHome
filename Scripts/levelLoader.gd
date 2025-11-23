@@ -148,6 +148,7 @@ func _createHomes() -> void:
         
         var texture: Texture2D = load(HOME_TEXTURE_PATHS[index])
         home.setWallTexture(texture)
+        home.setDoorStateOpen(true)
         
         
         

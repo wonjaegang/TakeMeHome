@@ -22,8 +22,22 @@ position = Vector2(8, -4)
 tile_map_data = PackedByteArray(0, 0, 0, 0, 255, 255, 1, 0, 21, 0, 14, 0, 0, 48, 255, 255, 255, 255, 1, 0, 22, 0, 14, 0, 0, 48, 254, 255, 255, 255, 1, 0, 23, 0, 14, 0, 0, 48)
 tile_set = ExtResource("2_5xu7f")
 
-[node name="door" type="TileMapLayer" parent="Sprite"]
-tile_map_data = PackedByteArray(0, 0, 255, 255, 0, 0, 1, 0, 23, 0, 23, 0, 0, 0, 0, 0, 0, 0, 1, 0, 24, 0, 23, 0, 0, 0)
+[node name="OpenDoorLeft" type="TileMapLayer" parent="Sprite"]
+tile_map_data = PackedByteArray(0, 0, 255, 255, 0, 0, 1, 0, 29, 0, 23, 0, 0, 0)
+tile_set = ExtResource("2_5xu7f")
+
+[node name="OpenDoorRight" type="TileMapLayer" parent="Sprite"]
+tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 1, 0, 30, 0, 23, 0, 0, 0)
+tile_set = ExtResource("2_5xu7f")
+
+[node name="ClosedDoorLeft" type="TileMapLayer" parent="Sprite"]
+visible = false
+tile_map_data = PackedByteArray(0, 0, 255, 255, 0, 0, 1, 0, 23, 0, 23, 0, 0, 0)
+tile_set = ExtResource("2_5xu7f")
+
+[node name="ClosedDoorRight" type="TileMapLayer" parent="Sprite"]
+visible = false
+tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 1, 0, 24, 0, 23, 0, 0, 0)
 tile_set = ExtResource("2_5xu7f")
 
 [node name="CarEnterArea" type="Area2D" parent="."]
