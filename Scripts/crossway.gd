@@ -20,8 +20,7 @@ var _origin: originType = originType.NONE
 
 func _ready() -> void:
     _carEnterArea.body_entered.connect(_on_body_entered)
-    _touchButton.pressed.connect(_on_touch_button_pressed)    
-    _carEnterArea.area_entered.connect(_on_area_entered)
+    _touchButton.pressed.connect(_on_touch_button_pressed)
     
 func _on_body_entered(body: Node2D) -> void:
     if body is not Car:
@@ -49,11 +48,6 @@ func _on_touch_button_pressed() -> void:
     if _origin == originType.NONE:
         activateBy(originType.USER)
     else:
-        deactivate()
-
-func _on_area_entered(area: Area2D) -> void:
-    if area.get_parent() is Crossway:
-        print('Crossway area entered by another Crossway')
         deactivate()
 
 func deactivate() -> void:

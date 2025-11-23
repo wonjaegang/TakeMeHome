@@ -1,14 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://dfxtn4mbqs318"]
+[gd_scene load_steps=3 format=4 uid="uid://dfxtn4mbqs318"]
 
 [ext_resource type="Script" uid="uid://drptvj57ywhnl" path="res://Scripts/home.gd" id="1_mmdh1"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_mmdh1"]
-radius = 20.0
-height = 40.0
+[ext_resource type="TileSet" uid="uid://bhsopyjv1t6xj" path="res://Resources/kenney_roguelike-modern-city/MordernCityTileMap16.tres" id="2_5xu7f"]
 
 [node name="Home2D" type="Node2D"]
 script = ExtResource("1_mmdh1")
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
-modulate = Color(0, 0, 0, 1)
-mesh = SubResource("CapsuleMesh_mmdh1")
+[node name="Wall" type="TileMapLayer" parent="."]
+position = Vector2(8, 0)
+tile_map_data = PackedByteArray("AAD+////AQAJAAUAAAD+/wAAAQAJAAgAAAD/////AQAKAAUAAAD//wAAAQAKAAgAAAAAAP//AQALAAUAAAAAAAAAAQALAAgAAAA=")
+tile_set = ExtResource("2_5xu7f")
+
+[node name="Door" type="TileMapLayer" parent="."]
+position = Vector2(8, 0)
+tile_map_data = PackedByteArray("AAD//wAAAQAUABsAAAA=")
+tile_set = ExtResource("2_5xu7f")
+
+[node name="Roof" type="TileMapLayer" parent="."]
+position = Vector2(8, -8)
+tile_map_data = PackedByteArray("AAD+////AQAXAAsAAAD/////AQAYAAsAAAAAAP//AQAZAAsAAAA=")
+tile_set = ExtResource("2_5xu7f")
