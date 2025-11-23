@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://p2f5vm1yu7tc"]
 
 [ext_resource type="Script" uid="uid://imyke7ch481o" path="res://Scripts/car.gd" id="1_rgxa4"]
-[ext_resource type="TileSet" uid="uid://bhsopyjv1t6xj" path="res://Resources/kenney_roguelike-modern-city/MordernCityTileMap16.tres" id="2_1nr1l"]
+[ext_resource type="Texture2D" uid="uid://cw2jy776avi1b" path="res://Resources/kenney_racing-pack/PNG/Cars/car_blue_1.png" id="2_1nr1l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rgxa4"]
 size = Vector2(18, 18)
@@ -10,9 +10,11 @@ size = Vector2(18, 18)
 motion_mode = 1
 script = ExtResource("1_rgxa4")
 
-[node name="TileMapLayer" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray(0, 0, 0, 0, 255, 255, 1, 0, 34, 0, 19, 0, 0, 96, 0, 0, 0, 0, 1, 0, 33, 0, 19, 0, 0, 96, 255, 255, 0, 0, 1, 0, 33, 0, 18, 0, 0, 96, 255, 255, 255, 255, 1, 0, 34, 0, 18, 0, 0, 96)
-tile_set = ExtResource("2_1nr1l")
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1.1920929e-07, 0)
+rotation = 1.5707964
+scale = Vector2(0.3397887, 0.3397888)
+texture = ExtResource("2_1nr1l")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_rgxa4")

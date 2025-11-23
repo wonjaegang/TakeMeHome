@@ -11,6 +11,13 @@ const ROAD_INTERVAL_X : float = 140
 const ROAD_CAR_GAP : float = 40
 const CROSSWAY_POINT_NUM: int = 12  # 한 road에 Crossway를 만들 수 있는 총 point 수
 const CROSSWAY_INTERVAL_Y : float = 64
+const CAR_TEXTURE_PATHS: Array[String] = [
+    "res://Resources/kenney_racing-pack/PNG/Cars/car_red_1.png",
+    "res://Resources/kenney_racing-pack/PNG/Cars/car_green_1.png",
+    "res://Resources/kenney_racing-pack/PNG/Cars/car_blue_1.png",
+    "res://Resources/kenney_racing-pack/PNG/Cars/car_yellow_1.png",
+    "res://Resources/kenney_racing-pack/PNG/Cars/car_black_1.png"
+]
 
 var _carScene : PackedScene = load("res://Scenes/CarScene.tscn")
 var _roadScene : PackedScene = load("res://Scenes/RoadScene.tscn")
@@ -50,6 +57,8 @@ func _createRoads() -> void:
     var roadNum = len(roadDirections)
     for index in range(roadNum):
         var road: Road = _roadScene.instantiate()
+        get_node('../Roads').add_child(road)
+
         road.setDirection(roadDirections[index])
         
         var firstRoadOffset :float = (VIEW_X - (roadNum - 1) * ROAD_INTERVAL_X) / 2
@@ -59,8 +68,7 @@ func _createRoads() -> void:
         elif road.getDirection() == Road.Direction.UP:
             road.rotation = PI
         else:
-            push_error('Unknown Direction')
-        get_node('../Roads').add_child(road)
+            push_error('Unknown Direction')        
 
 func _createCrossways() -> void:
     var crosswayInfos : Array = _levelData.get('crossway')
@@ -70,10 +78,11 @@ func _createCrossways() -> void:
         
         for crosswayPointIdx in range(CROSSWAY_POINT_NUM):
             var crossway: Crossway = _crosswayScene.instantiate()
+            get_node('../Crossways').add_child(crossway)
+
             var crosswayPosX = leftRoad.position.x + ROAD_INTERVAL_X / 2
             var crosswayPosY = leftRoad.position.y - (CROSSWAY_POINT_NUM - 1) * CROSSWAY_INTERVAL_Y / 2 + crosswayPointIdx * CROSSWAY_INTERVAL_Y
-            crossway.position = Vector2(crosswayPosX, crosswayPosY)
-            get_node('../Crossways').add_child(crossway)
+            crossway.position = Vector2(crosswayPosX, crosswayPosY)            
 
             crossway.deactivate()            
             for crosswayInfo: Dictionary in crosswayInfos:
@@ -98,8 +107,15 @@ func _createCars() -> void:
             carRotation = -PI / 2
         else:
             push_error('Unknown Direction')
-            
+
+        get_node('../Cars').add_child(car)
+        
         car.position = Vector2(startRoad.position.x, carPosY)
         car.rotation = carRotation
-        get_node('../Cars').add_child(car)
+        
+        var textureIndex: int = index % len(CAR_TEXTURE_PATHS)
+        var texture: Texture2D = load(CAR_TEXTURE_PATHS[textureIndex])
+        car.setCarTexture(texture)
+        
+        
         

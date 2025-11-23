@@ -11,9 +11,17 @@ var _has_enterd_road : bool = false
 var _angularSpeed : float = 0
 var _targetAngle : float = 0
 
+@onready var _sprite: Sprite2D = $Sprite2D
+
 func _ready() -> void:
     SignalBus.start_driving.connect(_startCar)
     SignalBus.make_enteredCar_turn.connect(_makeCarTurn)
+
+func setCarTexture(texture: Texture2D) -> void:
+    if _sprite:
+        _sprite.texture = texture
+    else:
+        push_error('before setting texture, node should be added to scene tree')
 
 func _physics_process(delta: float) -> void:
     if not _isDriving:
