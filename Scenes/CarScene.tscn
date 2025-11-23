@@ -4,7 +4,7 @@
 [ext_resource type="TileSet" uid="uid://bhsopyjv1t6xj" path="res://Resources/kenney_roguelike-modern-city/MordernCityTileMap16.tres" id="2_1nr1l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rgxa4"]
-size = Vector2(24, 18)
+size = Vector2(18, 18)
 
 [node name="Car2D" type="CharacterBody2D"]
 motion_mode = 1
