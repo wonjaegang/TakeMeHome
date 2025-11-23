@@ -18,10 +18,18 @@ const CAR_TEXTURE_PATHS: Array[String] = [
     "res://Resources/kenney_racing-pack/PNG/Cars/car_yellow_1.png",
     "res://Resources/kenney_racing-pack/PNG/Cars/car_black_1.png"
 ]
+const HOME_TEXTURE_PATHS: Array[String] = [
+    "res://Resources/kenney_racing-pack/PNG/Cars/car_red_4.png",
+    "res://Resources/kenney_racing-pack/PNG/Cars/car_green_4.png",
+    "res://Resources/kenney_racing-pack/PNG/Cars/car_blue_4.png",
+    "res://Resources/kenney_racing-pack/PNG/Cars/car_yellow_4.png",
+    "res://Resources/kenney_racing-pack/PNG/Cars/car_black_4.png"
+]
 
 var _carScene : PackedScene = load("res://Scenes/CarScene.tscn")
 var _roadScene : PackedScene = load("res://Scenes/RoadScene.tscn")
 var _crosswayScene : PackedScene = load("res://Scenes/CrosswayScene.tscn")
+var _homeScene : PackedScene = load("res://Scenes/HomeScene.tscn")
 
 var _levelData : Dictionary = {}
 
@@ -33,6 +41,7 @@ func _createBoard(chapter: int, level: int) -> void:
     _createRoads()
     _createCrossways()
     _createCars()
+    _createHomes()
         
 func _loadLevelData(chapter: int, level: int) -> void:
     var file_path : String = "res://Config/chapter%d.json" % chapter
@@ -110,12 +119,35 @@ func _createCars() -> void:
 
         get_node('../Cars').add_child(car)
         
+        car.setCarIndex(index)
         car.position = Vector2(startRoad.position.x, carPosY)
         car.rotation = carRotation
         
-        var textureIndex: int = index % len(CAR_TEXTURE_PATHS)
-        var texture: Texture2D = load(CAR_TEXTURE_PATHS[textureIndex])
+        var texture: Texture2D = load(CAR_TEXTURE_PATHS[index])
         car.setCarTexture(texture)
+        
+func _createHomes() -> void:
+    var carPath : Array = _levelData.get('car')
+    for index in range(len(carPath)):
+        var home: Home = _homeScene.instantiate()
+        var goalRoadIndex: int = carPath[index].get('goal')
+        var goalRoad :Road = get_node('../Roads').get_child(goalRoadIndex)
+        
+        var homePosY : float
+        var roadHalfLength : float = goalRoad.get_node('CarEnterArea/CollisionShape2D').shape.extents.y
+        if goalRoad.getDirection() == Road.Direction.DOWN:
+            homePosY = goalRoad.position.y + (roadHalfLength + ROAD_CAR_GAP)
+        elif goalRoad.getDirection() == Road.Direction.UP:
+            homePosY = goalRoad.position.y - (roadHalfLength + ROAD_CAR_GAP)
+        else:
+            push_error('Unknown Direction')
+        get_node('../Homes').add_child(home)
+        
+        home.setHomeIndex(index)
+        home.position = Vector2(goalRoad.position.x, homePosY)
+        
+        var texture: Texture2D = load(HOME_TEXTURE_PATHS[index])
+        home.setWallTexture(texture)
         
         
         

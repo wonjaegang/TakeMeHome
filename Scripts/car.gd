@@ -5,6 +5,9 @@ class_name Car
 ##  - 차량의 이동 관리
 
 const SPEED: float = 200.0
+const CAR_DISAPPEAR_DURATION: float = 0.3
+
+var _carIndex : int = -1
 var _isDriving : bool = false
 var _isTurning : bool = false
 var _has_enterd_road : bool = false
@@ -16,6 +19,10 @@ var _targetAngle : float = 0
 func _ready() -> void:
     SignalBus.start_driving.connect(_startCar)
     SignalBus.make_enteredCar_turn.connect(_makeCarTurn)
+    SignalBus.car_arrived_home.connect(_on_car_arrived_home)
+
+func setCarIndex(index: int) -> void:
+    _carIndex = index
 
 func setCarTexture(texture: Texture2D) -> void:
     if _sprite:
@@ -34,6 +41,18 @@ func _physics_process(delta: float) -> void:
 
 func _startCar() -> void:
     _isDriving = true
+
+func _on_car_arrived_home(car: Car, homeIndex: int) -> void:
+    if car != self:
+        return
+    
+    if homeIndex != _carIndex:
+        print("Car %d arrived at wrong home %d" % [_carIndex, homeIndex])
+
+    _isDriving = false
+    var tween = create_tween()
+    tween.tween_property(self, "modulate:a", 0.0, CAR_DISAPPEAR_DURATION)
+    tween.tween_callback(queue_free)
 
 func _makeCarTurn(car: Car, angle: float, radius: float) -> void:
     if car != self:
@@ -56,5 +75,5 @@ func getHasEnteredRoad() -> bool:
     
 func setHasEnteredRoad(flag: bool) -> void:
     _has_enterd_road = flag
-        
-    
+
+

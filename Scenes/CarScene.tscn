@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://p2f5vm1yu7tc"]
 
 [ext_resource type="Script" uid="uid://imyke7ch481o" path="res://Scripts/car.gd" id="1_rgxa4"]
-[ext_resource type="Texture2D" uid="uid://cw2jy776avi1b" path="res://Resources/kenney_racing-pack/PNG/Cars/car_blue_1.png" id="2_1nr1l"]
+[ext_resource type="Texture2D" uid="uid://brt2jctcps47j" path="res://Resources/kenney_racing-pack/PNG/Cars/car_black_1.png" id="2_1nr1l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rgxa4"]
 size = Vector2(18, 18)
