@@ -65,7 +65,7 @@ func _resetCar() -> void:
     rotation = _initialRotation
     modulate.a = 1.0
 
-func _on_car_arrived_home(car: Car) -> void:
+func _on_car_arrived_home(car: Car, _isSucceeded: bool) -> void:
     if car != self:
         return
     

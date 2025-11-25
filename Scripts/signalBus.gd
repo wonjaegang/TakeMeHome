@@ -11,11 +11,15 @@ signal start_simulation
 @warning_ignore("unused_signal")
 signal reset_simulation
 @warning_ignore("unused_signal")
+signal Crossway_generated
+@warning_ignore("unused_signal")
+signal Crossway_eliminated
+@warning_ignore("unused_signal")
 signal clear_User_Crossway
 @warning_ignore("unused_signal")
 signal make_enteredCar_turn(car: Car, angle:float, radius:float)
 @warning_ignore("unused_signal")
-signal car_arrived_home(car: Car)
+signal car_arrived_home(car: Car, isSucceeded: bool)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

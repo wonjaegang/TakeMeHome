@@ -35,6 +35,7 @@ var _levelData : Dictionary = {}
 
 func _ready() -> void:    
     _createBoard(1, 2)
+    get_node('../LevelComplete').initializeLevel(len(_levelData.get('car')), 2)
     
 func _createBoard(chapter: int, level: int) -> void:
     _loadLevelData(chapter, level)

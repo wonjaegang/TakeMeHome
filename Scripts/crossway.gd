@@ -71,6 +71,7 @@ func deactivate() -> void:
     _createPoint.visible = true
     _carEnterArea.monitoring = false
     _carEnterArea.monitorable = false
+    SignalBus.Crossway_eliminated.emit()
 
 func activateBy(origin: originType) -> void:
     if _origin != originType.NONE:
@@ -88,6 +89,7 @@ func activateBy(origin: originType) -> void:
 
     if origin == originType.USER:
         target_layers.append(_userCrossway)
+        SignalBus.Crossway_generated.emit()
     elif origin == originType.SYSTEM:        
         target_layers.append(_systemCrossway)
     

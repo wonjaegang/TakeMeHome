@@ -1,11 +1,15 @@
-[gd_scene load_steps=8 format=3 uid="uid://b27k6ta1nwet8"]
+[gd_scene load_steps=11 format=3 uid="uid://b27k6ta1nwet8"]
 
+[ext_resource type="Script" uid="uid://cqyuoxvwgksxf" path="res://Scripts/levelComplete.gd" id="1_a53r2"]
 [ext_resource type="Texture2D" uid="uid://d2ielde2u7mtj" path="res://Resources/kenney_ui-pack/PNG/Green/Double/button_rectangle_flat.png" id="1_f8yfa"]
 [ext_resource type="FontFile" uid="uid://brjw5xqac5384" path="res://Resources/kenney_ui-pack/Font/Kenney Future.ttf" id="2_a53r2"]
 [ext_resource type="Texture2D" uid="uid://udvek20216og" path="res://Resources/kenney_ui-pack/PNG/Yellow/Double/star_outline.png" id="2_dfcc4"]
 [ext_resource type="Texture2D" uid="uid://dqw2cw64my0ta" path="res://Resources/kenney_ui-pack/PNG/Green/Double/button_round_depth_border.png" id="3_a53r2"]
 [ext_resource type="Texture2D" uid="uid://u4wexd81gilq" path="res://Resources/kenney_ui-pack/PNG/Extra/Double/icon_repeat_outline.png" id="4_ubyoi"]
 [ext_resource type="Texture2D" uid="uid://fgw6w4ywo16g" path="res://Resources/kenney_ui-pack/PNG/Extra/Double/icon_play_outline.png" id="5_hivgs"]
+[ext_resource type="Texture2D" uid="uid://clpgfcx5kn8cv" path="res://Resources/kenney_ui-pack/PNG/Yellow/Double/star.png" id="5_ubyoi"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_a53r2"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ubyoi"]
 font = ExtResource("2_a53r2")
@@ -19,17 +23,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-metadata/_edit_lock_ = true
+script = ExtResource("1_a53r2")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.57700837, 0.5770084, 0.57700837, 0.34117648)
-metadata/_edit_lock_ = true
+[node name="ColorRect" type="MeshInstance2D" parent="."]
+modulate = Color(0.46229106, 0.46229047, 0.46229059, 0.3529412)
+position = Vector2(389.75, 660.75)
+scale = Vector2(776.5, 1322.5)
+mesh = SubResource("BoxMesh_a53r2")
 
 [node name="ButtonRectangleFlat" type="Sprite2D" parent="."]
 position = Vector2(359, 621.3125)
@@ -53,20 +53,42 @@ label_settings = SubResource("LabelSettings_ubyoi")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="StarOutlineDepth2" type="Sprite2D" parent="."]
+[node name="StarContainers" type="Node2D" parent="."]
+
+[node name="Star1" type="Sprite2D" parent="StarContainers"]
 position = Vector2(458.00003, 450.99997)
-rotation = 0.12217305
+rotation = 0.122173056
 texture = ExtResource("2_dfcc4")
 
-[node name="StarOutlineDepth4" type="Sprite2D" parent="."]
+[node name="Star3" type="Sprite2D" parent="StarContainers"]
 position = Vector2(238, 448.99997)
-rotation = -0.12217305
+rotation = -0.122173056
 texture = ExtResource("2_dfcc4")
 
-[node name="StarOutlineDepth3" type="Sprite2D" parent="."]
+[node name="Star2" type="Sprite2D" parent="StarContainers"]
 position = Vector2(349, 441)
 scale = Vector2(1.2, 1.2)
 texture = ExtResource("2_dfcc4")
+
+[node name="Stars" type="Node2D" parent="."]
+
+[node name="Star1" type="Sprite2D" parent="Stars"]
+visible = false
+position = Vector2(458.00003, 450.99997)
+rotation = 0.122173056
+texture = ExtResource("5_ubyoi")
+
+[node name="Star3" type="Sprite2D" parent="Stars"]
+visible = false
+position = Vector2(238, 448.99997)
+rotation = -0.122173056
+texture = ExtResource("5_ubyoi")
+
+[node name="Star2" type="Sprite2D" parent="Stars"]
+visible = false
+position = Vector2(349, 441)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("5_ubyoi")
 
 [node name="ButtonRoundDepthBorder" type="Sprite2D" parent="."]
 position = Vector2(236, 687)

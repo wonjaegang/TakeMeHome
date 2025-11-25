@@ -29,9 +29,11 @@ func _on_body_entered(body: Node2D) -> void:
         return
     
     var car: Car = body
-    SignalBus.car_arrived_home.emit(body)
+    var isSucceeded: bool = false
     if car.getCarIndex() == _homeIndex:
         setDoorStateOpen(false)
+        isSucceeded = true
+    SignalBus.car_arrived_home.emit(body, isSucceeded)
 
 func setDoorStateOpen(isOpen: bool) -> void:
     if _isDoorOpen == isOpen:
