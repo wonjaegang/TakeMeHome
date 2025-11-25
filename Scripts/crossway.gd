@@ -4,11 +4,12 @@ class_name Crossway
 ## 책임:
 ##  - 차량이 들어오면 회전하도록 경로변경
 
-const COLLISION_FEEDBACK_DURATION: float = 0.1
+const COLLISION_FEEDBACK_DURATION: float = 0.15
 const ACTIVATE_ANIMATION_DURATION: float = 0.3
 
 enum originType {NONE, SYSTEM, USER}
 var _origin: originType = originType.NONE
+var _tween: Tween
 
 @onready var _carEnterArea: Area2D = $CarEnterArea
 @onready var _touchButton: TextureButton = $TouchButton
@@ -16,6 +17,7 @@ var _origin: originType = originType.NONE
 @onready var _userCrossway: TileMapLayer = $TileMap/UserCrossway
 @onready var _roadOverlap: TileMapLayer = $TileMap/RoadOverlap
 @onready var _createPoint: TileMapLayer = $TileMap/CreatePoint
+@onready var _collisionAlert: MeshInstance2D = $CollisionAlert
 @onready var _collisionShape: CollisionShape2D = $CarEnterArea/CollisionShape2D
 
 func _ready() -> void:
@@ -96,26 +98,24 @@ func activateBy(origin: originType) -> void:
     _playActivateAnimation(target_layers)
 
 func _playActivateAnimation(target_layers: Array[CanvasItem]) -> void:
-    var tween: Tween = create_tween()
-    tween.set_parallel(true)
+    if _tween:
+        _tween.kill()
+    _tween = create_tween()
+    _tween.set_parallel(true)
     
     for layer in target_layers:
         layer.modulate.a = 0.0
         layer.visible = true
-        tween.tween_property(layer, "modulate:a", 1.0, ACTIVATE_ANIMATION_DURATION).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+        _tween.tween_property(layer, "modulate:a", 1.0, ACTIVATE_ANIMATION_DURATION).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 
-func playCollisionFeedback() -> void:
-    var target_layer: CanvasItem
-    if _origin == originType.USER:
-        target_layer = _userCrossway
-    elif _origin == originType.SYSTEM:
-        target_layer = _systemCrossway
+func playCollisionFeedback() -> void:        
+    if _tween:
+        _tween.kill()
     
-    if target_layer:
-        var original_color: Color = target_layer.modulate
-        var tween: Tween = create_tween()
-        tween.tween_property(target_layer, "modulate", Color(1, 0.3, 0.3), COLLISION_FEEDBACK_DURATION).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-        tween.tween_property(target_layer, "modulate", original_color, COLLISION_FEEDBACK_DURATION).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+    _collisionAlert.modulate.a = 0.0    
+    _tween = create_tween()
+    _tween.tween_property(_collisionAlert, "modulate:a", 0.4, COLLISION_FEEDBACK_DURATION).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+    _tween.tween_property(_collisionAlert, "modulate:a", 0.0, COLLISION_FEEDBACK_DURATION).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 
 func _getOverlappingActiveCrossway() -> Crossway:
     var space_state: PhysicsDirectSpaceState2D = get_world_2d().direct_space_state

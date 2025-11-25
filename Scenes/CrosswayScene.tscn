@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=4 uid="uid://kl5yxxly6ink"]
+[gd_scene load_steps=9 format=4 uid="uid://kl5yxxly6ink"]
 
 [ext_resource type="Script" uid="uid://b4mhsl4q25c5o" path="res://Scripts/crossway.gd" id="1_qcomx"]
 [ext_resource type="Texture2D" uid="uid://dnfxvfjokcpu0" path="res://Resources/kenney_rpg-urban-pack/Tilemap/tilemap_packed.png" id="2_qcomx"]
@@ -987,6 +987,8 @@ texture = ExtResource("2_qcomx")
 [sub_resource type="TileSet" id="TileSet_4t4uk"]
 sources/2 = SubResource("TileSetAtlasSource_m8x2l")
 
+[sub_resource type="BoxMesh" id="BoxMesh_qcomx"]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_utbm6"]
 size = Vector2(160, 48)
 
@@ -1012,6 +1014,12 @@ tile_set = SubResource("TileSet_yme1q")
 modulate = Color(0.49461693, 0.51974744, 0.54621804, 1)
 tile_map_data = PackedByteArray("AAD9//7/AgAJAAAAAAD+//7/AgAJAAAAAAD///7/AgAJAAAAAAAAAP7/AgAJAAAAAAABAP7/AgAJAAAAAAACAP7/AgAJAAAAAAD9/wAAAgAJAAIAAAD+/wAAAgAJAAIAAAD9////AgAJAAEAAAACAP//AgAJAAEAAAABAP//AgAJAAEAAAAAAP//AgAJAAEAAAD/////AgAJAAEAAAD+////AgAJAAEAAAACAAAAAgAJAAIAAAABAAAAAgAJAAIAAAAAAAAAAgAJAAIAAAD//wAAAgAJAAIAAAA=")
 tile_set = SubResource("TileSet_4t4uk")
+
+[node name="CollisionAlert" type="MeshInstance2D" parent="."]
+modulate = Color(1, 0, 0, 0)
+position = Vector2(3.8146973e-06, -7.1525574e-07)
+scale = Vector2(96, 48)
+mesh = SubResource("BoxMesh_qcomx")
 
 [node name="CarEnterArea" type="Area2D" parent="."]
 visible = false
