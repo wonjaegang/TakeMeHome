@@ -4,7 +4,7 @@ class_name Car
 ## 책임:
 ##  - 차량의 이동 관리
 
-const SPEED: float = 200.0
+const SPEED: float = 250.0
 const CAR_DISAPPEAR_DURATION: float = 0.3
 
 var _carIndex : int = -1

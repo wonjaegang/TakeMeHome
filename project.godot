@@ -23,8 +23,8 @@ SignalBus="*res://Scripts/signalBus.gd"
 
 window/size/viewport_width=720
 window/size/viewport_height=1280
+window/stretch/mode="canvas_items"
 window/stretch/aspect="keep_width"
-window/stretch/scale=0.5
 window/handheld/orientation=1
 
 [input_devices]

@@ -15,20 +15,16 @@
 font = ExtResource("2_a53r2")
 outline_size = 4
 outline_color = Color(0, 0, 0, 1)
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 1)
 
-[node name="LevelComplete" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="LevelComplete" type="Node2D"]
 script = ExtResource("1_a53r2")
 
 [node name="ColorRect" type="MeshInstance2D" parent="."]
-modulate = Color(0.46229106, 0.46229047, 0.46229059, 0.3529412)
-position = Vector2(389.75, 660.75)
-scale = Vector2(776.5, 1322.5)
+modulate = Color(0.4627451, 0.4627451, 0.4627451, 0.25490198)
+position = Vector2(361.50003, 645.5)
+scale = Vector2(963, 1499)
 mesh = SubResource("BoxMesh_a53r2")
 
 [node name="ButtonRectangleFlat" type="Sprite2D" parent="."]
@@ -56,13 +52,13 @@ vertical_alignment = 1
 [node name="StarContainers" type="Node2D" parent="."]
 
 [node name="Star1" type="Sprite2D" parent="StarContainers"]
-position = Vector2(458.00003, 450.99997)
-rotation = 0.122173056
+position = Vector2(238, 448.99997)
+rotation = -0.122173056
 texture = ExtResource("2_dfcc4")
 
 [node name="Star3" type="Sprite2D" parent="StarContainers"]
-position = Vector2(238, 448.99997)
-rotation = -0.122173056
+position = Vector2(458.00003, 450.99997)
+rotation = 0.122173056
 texture = ExtResource("2_dfcc4")
 
 [node name="Star2" type="Sprite2D" parent="StarContainers"]
@@ -74,14 +70,14 @@ texture = ExtResource("2_dfcc4")
 
 [node name="Star1" type="Sprite2D" parent="Stars"]
 visible = false
-position = Vector2(458.00003, 450.99997)
-rotation = 0.122173056
+position = Vector2(238, 448.99997)
+rotation = -0.122173056
 texture = ExtResource("5_ubyoi")
 
 [node name="Star3" type="Sprite2D" parent="Stars"]
 visible = false
-position = Vector2(238, 448.99997)
-rotation = -0.122173056
+position = Vector2(458.00003, 450.99997)
+rotation = 0.122173056
 texture = ExtResource("5_ubyoi")
 
 [node name="Star2" type="Sprite2D" parent="Stars"]
@@ -90,18 +86,30 @@ position = Vector2(349, 441)
 scale = Vector2(1.2, 1.2)
 texture = ExtResource("5_ubyoi")
 
-[node name="ButtonRoundDepthBorder" type="Sprite2D" parent="."]
-position = Vector2(236, 687)
-texture = ExtResource("3_a53r2")
+[node name="PlayAgainButton" type="Button" parent="."]
+offset_left = 175.0
+offset_top = 616.0
+offset_right = 311.0
+offset_bottom = 752.0
+focus_mode = 0
+icon = ExtResource("3_a53r2")
+flat = true
 
-[node name="ButtonRoundDepthBorder2" type="Sprite2D" parent="."]
-position = Vector2(476, 684)
-texture = ExtResource("3_a53r2")
-
-[node name="IconRepeatOutline" type="Sprite2D" parent="."]
-position = Vector2(239, 685)
+[node name="IconRepeatOutline" type="Sprite2D" parent="PlayAgainButton"]
+position = Vector2(71, 64)
+scale = Vector2(0.875, 0.875)
 texture = ExtResource("4_ubyoi")
 
-[node name="IconPlayOutline" type="Sprite2D" parent="."]
-position = Vector2(481, 681)
+[node name="PlayAgainButton2" type="Button" parent="."]
+offset_left = 403.0
+offset_top = 617.0
+offset_right = 539.0
+offset_bottom = 753.0
+focus_mode = 0
+icon = ExtResource("3_a53r2")
+flat = true
+
+[node name="IconRepeatOutline" type="Sprite2D" parent="PlayAgainButton2"]
+position = Vector2(75, 63.000008)
+scale = Vector2(0.86764705, 0.86764705)
 texture = ExtResource("5_hivgs")

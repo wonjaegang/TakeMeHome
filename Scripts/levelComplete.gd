@@ -1,4 +1,5 @@
-extends Control
+extends Node2D
+class_name LevelComplete
 
 var _totalCarNum: int
 var _minimunCrosswayNum: int
