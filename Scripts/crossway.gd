@@ -19,8 +19,17 @@ var _origin: originType = originType.NONE
 @onready var _collisionShape: CollisionShape2D = $CarEnterArea/CollisionShape2D
 
 func _ready() -> void:
+    SignalBus.start_simulation.connect(_disableTouchButton)
+    SignalBus.reset_simulation.connect(_enableTouchButton)
+    SignalBus.clear_User_Crossway.connect(deactivate)
     _carEnterArea.body_entered.connect(_on_body_entered)
     _touchButton.pressed.connect(_on_touch_button_pressed)
+
+func _disableTouchButton() -> void:
+    _touchButton.disabled = true
+
+func _enableTouchButton() -> void:
+    _touchButton.disabled = false
     
 func _on_body_entered(body: Node2D) -> void:
     if body is not Car:

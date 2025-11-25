@@ -1,11 +1,11 @@
-extends Control
+extends Button
 class_name ResetButton
-
-signal turn_car
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-    connect('pressed', Callable(_turnEveryCar))
+    pressed.connect(_onPressed)
+    SignalBus.start_simulation.connect(func() -> void: disabled = true)
+    SignalBus.reset_simulation.connect(func() -> void: disabled = false)
     
-func _turnEveryCar():
-    emit_signal('turn_car')
+func _onPressed():
+    SignalBus.clear_User_Crossway.emit()

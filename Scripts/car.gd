@@ -8,16 +8,20 @@ const SPEED: float = 200.0
 const CAR_DISAPPEAR_DURATION: float = 0.3
 
 var _carIndex : int = -1
+var _initialPosition : Vector2 = Vector2.ZERO
+var _initialRotation : float
 var _isDriving : bool = false
 var _isTurning : bool = false
-var _has_enterd_road : bool = false
+var _has_entered_road : bool = false
 var _angularSpeed : float = 0
 var _targetAngle : float = 0
+var _tween: Tween
 
 @onready var _sprite: Sprite2D = $Sprite2D
 
 func _ready() -> void:
-    SignalBus.start_driving.connect(_startCar)
+    SignalBus.start_simulation.connect(_startCar)
+    SignalBus.reset_simulation.connect(_resetCar)
     SignalBus.make_enteredCar_turn.connect(_makeCarTurn)
     SignalBus.car_arrived_home.connect(_on_car_arrived_home)
 
@@ -26,6 +30,10 @@ func setCarIndex(index: int) -> void:
 
 func getCarIndex() -> int:
     return _carIndex
+
+func setInitialTransform(initPos: Vector2, initRot: float) -> void:
+    _initialPosition = initPos
+    _initialRotation = initRot
 
 func setCarTexture(texture: Texture2D) -> void:
     if _sprite:
@@ -45,14 +53,27 @@ func _physics_process(delta: float) -> void:
 func _startCar() -> void:
     _isDriving = true
 
+func _resetCar() -> void:
+    if _tween:
+        _tween.kill()
+    _isDriving = false
+    _isTurning = false
+    _has_entered_road = false
+    _angularSpeed = 0
+    _targetAngle = rotation
+    position = _initialPosition
+    rotation = _initialRotation
+    modulate.a = 1.0
+
 func _on_car_arrived_home(car: Car) -> void:
     if car != self:
         return
     
     _isDriving = false
-    var tween = create_tween()
-    tween.tween_property(self, "modulate:a", 0.0, CAR_DISAPPEAR_DURATION)
-    tween.tween_callback(queue_free)
+    if _tween:
+        _tween.kill()
+    _tween = create_tween()
+    _tween.tween_property(self, "modulate:a", 0.0, CAR_DISAPPEAR_DURATION)
 
 func _makeCarTurn(car: Car, angle: float, radius: float) -> void:
     if car != self:
@@ -71,9 +92,7 @@ func _moveForward(delta: float) -> void:
     position += Vector2.RIGHT.rotated(rotation) * SPEED * delta
 
 func getHasEnteredRoad() -> bool:
-    return _has_enterd_road
+    return _has_entered_road
     
 func setHasEnteredRoad(flag: bool) -> void:
-    _has_enterd_road = flag
-
-
+    _has_entered_road = flag

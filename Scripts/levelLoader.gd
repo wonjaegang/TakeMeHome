@@ -122,6 +122,7 @@ func _createCars() -> void:
         car.setCarIndex(index)
         car.position = Vector2(startRoad.position.x, carPosY)
         car.rotation = carRotation
+        car.setInitialTransform(car.position, car.rotation)
         
         var texture: Texture2D = load(CAR_TEXTURE_PATHS[index])
         car.setCarTexture(texture)
