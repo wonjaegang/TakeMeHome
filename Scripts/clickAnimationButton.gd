@@ -1,7 +1,7 @@
 extends Button
 class_name ClickAnimationButton
 
-const PRESSED_SCALE: Vector2 = Vector2(0.8, 0.8)
+const PRESSED_SCALE: Vector2 = Vector2(0.85, 0.85)
 const ORIGINAL_SCALE: Vector2 = Vector2(1.0, 1.0)
 const ANIMATION_DURATION: float = 0.1
 

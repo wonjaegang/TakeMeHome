@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dfxtn4mbqs318"]
+[gd_scene load_steps=6 format=3 uid="uid://dfxtn4mbqs318"]
 
 [ext_resource type="Script" uid="uid://drptvj57ywhnl" path="res://Scripts/home.gd" id="1_mmdh1"]
 [ext_resource type="TileSet" uid="uid://bhsopyjv1t6xj" path="res://Resources/kenney_roguelike-modern-city/MordernCityTileMap16.tres" id="2_5xu7f"]
 [ext_resource type="Texture2D" uid="uid://bhkm30ipguo0w" path="res://Resources/kenney_racing-pack/PNG/Cars/car_black_4.png" id="2_u74ba"]
+[ext_resource type="Texture2D" uid="uid://pnmwxq4fya5q" path="res://Resources/kenney_racing-pack/PNG/Objects/oil.png" id="4_mxma7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5xu7f"]
 size = Vector2(48, 40)
@@ -21,6 +22,16 @@ texture = ExtResource("2_u74ba")
 position = Vector2(8, -4)
 tile_map_data = PackedByteArray(0, 0, 0, 0, 255, 255, 1, 0, 21, 0, 14, 0, 0, 48, 255, 255, 255, 255, 1, 0, 22, 0, 14, 0, 0, 48, 254, 255, 255, 255, 1, 0, 23, 0, 14, 0, 0, 48)
 tile_set = ExtResource("2_5xu7f")
+
+[node name="Chimney" type="TileMapLayer" parent="Sprite"]
+position = Vector2(8, 4)
+tile_map_data = PackedByteArray(0, 0, 0, 0, 254, 255, 1, 0, 17, 0, 13, 0, 0, 0)
+tile_set = ExtResource("2_5xu7f")
+
+[node name="Smoke" type="Sprite2D" parent="Sprite"]
+position = Vector2(16.669735, -23.125)
+scale = Vector2(0.03947368, 0.03947368)
+texture = ExtResource("4_mxma7")
 
 [node name="OpenDoorLeft" type="TileMapLayer" parent="Sprite"]
 tile_map_data = PackedByteArray(0, 0, 255, 255, 0, 0, 1, 0, 29, 0, 23, 0, 0, 0)
