@@ -103,7 +103,7 @@ position = Vector2(71, 64)
 scale = Vector2(0.875, 0.875)
 texture = ExtResource("4_ubyoi")
 
-[node name="PlayAgainButton2" type="Button" parent="."]
+[node name="NextLevelButton" type="Button" parent="."]
 offset_left = 403.0
 offset_top = 617.0
 offset_right = 539.0
@@ -114,7 +114,7 @@ flat = true
 script = ExtResource("7_hivgs")
 metadata/_custom_type_script = "uid://d1s15nnhgbmhv"
 
-[node name="IconRepeatOutline" type="Sprite2D" parent="PlayAgainButton2"]
+[node name="IconRepeatOutline" type="Sprite2D" parent="NextLevelButton"]
 position = Vector2(75, 63.000008)
 scale = Vector2(0.86764705, 0.86764705)
 texture = ExtResource("5_hivgs")

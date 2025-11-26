@@ -8,24 +8,38 @@ var _arrivedCarNum: int = 0
 var _succeededCarNum: int = 0
 var _generatedCrosswayNum: int = 0
 
-@onready var stars: Array[Sprite2D] = [$Stars/Star1, $Stars/Star2, $Stars/Star3]
+@onready var _stars: Array[Sprite2D] = [$Stars/Star1, $Stars/Star2, $Stars/Star3]
+@onready var _playAgainButton: ClickAnimationButton = $PlayAgainButton
+@onready var _nextLevelButton: ClickAnimationButton = $NextLevelButton
     
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+    SignalBus.Crossway_generated.connect(_on_crossway_generated)
+    SignalBus.Crossway_eliminated.connect(_on_crossway_eliminated)
+    SignalBus.clear_User_Crossway.connect(_on_clear_user_crossway)
+    SignalBus.reset_simulation.connect(_on_reset_simulation)
     SignalBus.car_arrived_home.connect(_on_car_arrived_home)
-    SignalBus.reset_simulation.connect(func() -> void:
-        _arrivedCarNum = 0
-        _succeededCarNum = 0
-    )
-    SignalBus.Crossway_generated.connect(func() -> void: _generatedCrosswayNum += 1)
-    SignalBus.Crossway_eliminated.connect(func() -> void: _generatedCrosswayNum -= 1)
-    SignalBus.clear_User_Crossway.connect(func() -> void: _generatedCrosswayNum = 0)
+    _playAgainButton.pressed.connect(_on_play_again_button_pressed)
+    _nextLevelButton.pressed.connect(_on_next_level_button_pressed)
     _displayStars(0)
     visible = false
+
+func _on_crossway_generated() -> void:
+    _generatedCrosswayNum += 1
+
+func _on_crossway_eliminated() -> void:
+    _generatedCrosswayNum -= 1
+
+func _on_clear_user_crossway() -> void:
+    _generatedCrosswayNum = 0
 
 func initializeLevel(totalCarNum: int, minimumCrosswayNum: int) -> void:
     _totalCarNum = totalCarNum
     _minimunCrosswayNum = minimumCrosswayNum
+
+func _on_reset_simulation() -> void:
+    _arrivedCarNum = 0
+    _succeededCarNum = 0
 
 func _on_car_arrived_home(_car: Car, isSucceeded: bool) -> void:
     _arrivedCarNum += 1
@@ -60,7 +74,13 @@ func _displayStars(starNum) -> void:
     for i in range(starNum):
         if i >= 3:
             break
-        stars[i].visible = true
+        _stars[i].visible = true
+
+func _on_play_again_button_pressed() -> void:
+    get_tree().reload_current_scene()
+
+func _on_next_level_button_pressed() -> void:
+    pass
     
 
         
