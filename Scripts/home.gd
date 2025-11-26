@@ -24,13 +24,14 @@ var _smokeInitialModulate: Color
 
 func _ready() -> void:
     _carEnterArea.body_entered.connect(_on_body_entered)
-    SignalBus.reset_simulation.connect(_on_reset_simulation)
-    
-    if _smoke:
-        _smokeInitialPos = _smoke.position
-        _smokeInitialScale = _smoke.scale
-        _smokeInitialModulate = _smoke.modulate
-        _smoke.visible = false
+    SignalBus.reset_simulation.connect(_on_reset_simulation)    
+    _initializeSmoke()
+
+func _initializeSmoke() -> void:
+    _smokeInitialPos = _smoke.position
+    _smokeInitialScale = _smoke.scale
+    _smokeInitialModulate = _smoke.modulate
+    _smoke.visible = false
 
 func _on_reset_simulation() -> void:
     setDoorStateOpen(true)
@@ -85,26 +86,23 @@ func _playDoorAnimation(isOpen: bool) -> void:
 func _playChimneySmokeAnimation(isSmoke: bool) -> void:
     if _chimneySmokeTween:
         _chimneySmokeTween.kill()
-    
-    if not _smoke:
-        return
-        
+            
     if isSmoke:
         _smoke.visible = true
         _chimneySmokeTween = create_tween().set_loops()
-        
-        # 매 루프마다 초기 상태 설정 (위치, 크기, 투명도)
-        _chimneySmokeTween.tween_callback(func():
-            _smoke.position = _smokeInitialPos
-            _smoke.scale = _smokeInitialScale
-            _smoke.modulate = _smokeInitialModulate
-        )
-        
-        # 위로 올라가며 커지고 사라지는 애니메이션
         _chimneySmokeTween.set_parallel(true)
-        _chimneySmokeTween.tween_property(_smoke, "position:y", -20.0, 1.5).as_relative()
-        _chimneySmokeTween.tween_property(_smoke, "scale", Vector2(1.0, 1.0), 1.5)
-        _chimneySmokeTween.tween_property(_smoke, "modulate:a", 0.0, 1.5).set_ease(Tween.EASE_IN)
+
+        var targetPos: Vector2 = _smokeInitialPos + Vector2(20.0, -40.0)
+        const SMOKE_ANIMATION_DURATION: float = 0.7
+        _chimneySmokeTween.tween_property(_smoke, "position", targetPos, SMOKE_ANIMATION_DURATION).from(_smokeInitialPos)
+        
+        var targetScale: Vector2 = Vector2(0.3, 0.3)
+        _chimneySmokeTween.tween_property(_smoke, "scale", targetScale, SMOKE_ANIMATION_DURATION).from(_smokeInitialScale)
+        
+        _chimneySmokeTween.tween_property(_smoke, "modulate:a", 0.0, SMOKE_ANIMATION_DURATION).from(_smokeInitialModulate.a).set_ease(Tween.EASE_OUT)
+        
+        _chimneySmokeTween.set_parallel(false)
+        _chimneySmokeTween.tween_interval(0.2)
     else:
         _smoke.visible = false
 
