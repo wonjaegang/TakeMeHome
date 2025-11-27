@@ -1,6 +1,8 @@
 extends Node2D
 class_name LevelComplete
 
+const STAR_ANIMATION_DURATION: float = 0.3
+
 var _totalCarNum: int
 var _minimunCrosswayNum: int
 
@@ -76,7 +78,6 @@ func _calcualteStarNum() -> int:
 
 func _displayStars(starNum: int) -> void:
     for star in _stars:
-        star.visible = false
         star.scale = Vector2.ZERO
         
     var tween = create_tween()
@@ -85,10 +86,8 @@ func _displayStars(starNum: int) -> void:
             break
             
         var star = _stars[i]
-        var target_scale = _starInitialScales[i]
-        
-        tween.tween_callback(func(): star.visible = true)
-        tween.tween_property(star, "scale", target_scale, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+        var target_scale = _starInitialScales[i]        
+        tween.tween_property(star, "scale", target_scale, STAR_ANIMATION_DURATION).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 
 func _on_play_again_button_pressed() -> void:
     get_tree().reload_current_scene()
