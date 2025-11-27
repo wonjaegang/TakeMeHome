@@ -58,7 +58,7 @@ func _spawn_sign(pos: Vector2) -> void:
     
     # 1. 애니메이션 (깜빡임 후 삭제)
     var anim_tween = create_tween()
-    anim_tween.tween_property(sign_node, "modulate:a", 1.0, SIGN_ANIMATION_DURATION * 0.3)
+    anim_tween.tween_property(sign_node, "modulate:a", 0.7, SIGN_ANIMATION_DURATION * 0.3)
     anim_tween.tween_property(sign_node, "modulate:a", 0.0, SIGN_ANIMATION_DURATION * 0.7)
     anim_tween.tween_callback(sign_node.queue_free)
     

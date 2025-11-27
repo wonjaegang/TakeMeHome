@@ -70,19 +70,16 @@ texture = ExtResource("2_dfcc4")
 [node name="Stars" type="Node2D" parent="."]
 
 [node name="Star1" type="Sprite2D" parent="Stars"]
-visible = false
 position = Vector2(238, 448.99997)
 rotation = -0.122173056
 texture = ExtResource("5_ubyoi")
 
 [node name="Star3" type="Sprite2D" parent="Stars"]
-visible = false
 position = Vector2(458.00003, 450.99997)
 rotation = 0.122173056
 texture = ExtResource("5_ubyoi")
 
 [node name="Star2" type="Sprite2D" parent="Stars"]
-visible = false
 position = Vector2(349, 441)
 scale = Vector2(1.2, 1.2)
 texture = ExtResource("5_ubyoi")

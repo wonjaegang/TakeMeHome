@@ -11,9 +11,14 @@ var _generatedCrosswayNum: int = 0
 @onready var _stars: Array[Sprite2D] = [$Stars/Star1, $Stars/Star2, $Stars/Star3]
 @onready var _playAgainButton: ClickAnimationButton = $PlayAgainButton
 @onready var _nextLevelButton: ClickAnimationButton = $NextLevelButton
+
+var _starInitialScales: Array[Vector2] = []
     
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+    for star in _stars:
+        _starInitialScales.append(star.scale)
+        
     SignalBus.Crossway_generated.connect(_on_crossway_generated)
     SignalBus.Crossway_eliminated.connect(_on_crossway_eliminated)
     SignalBus.clear_User_Crossway.connect(_on_clear_user_crossway)
@@ -21,7 +26,6 @@ func _ready() -> void:
     SignalBus.car_arrived_home.connect(_on_car_arrived_home)
     _playAgainButton.pressed.connect(_on_play_again_button_pressed)
     _nextLevelButton.pressed.connect(_on_next_level_button_pressed)
-    _displayStars(0)
     visible = false
 
 func _on_crossway_generated() -> void:
@@ -70,11 +74,21 @@ func _calcualteStarNum() -> int:
     else:
         return 4
 
-func _displayStars(starNum) -> void:
+func _displayStars(starNum: int) -> void:
+    for star in _stars:
+        star.visible = false
+        star.scale = Vector2.ZERO
+        
+    var tween = create_tween()
     for i in range(starNum):
-        if i >= 3:
+        if i >= _stars.size():
             break
-        _stars[i].visible = true
+            
+        var star = _stars[i]
+        var target_scale = _starInitialScales[i]
+        
+        tween.tween_callback(func(): star.visible = true)
+        tween.tween_property(star, "scale", target_scale, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 
 func _on_play_again_button_pressed() -> void:
     get_tree().reload_current_scene()

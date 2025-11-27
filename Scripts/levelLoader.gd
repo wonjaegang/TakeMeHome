@@ -34,7 +34,7 @@ var _homeScene : PackedScene = load("res://Scenes/HomeScene.tscn")
 var _levelData : Dictionary = {}
 
 func _ready() -> void:    
-    _createBoard(1, 2)
+    _createBoard(1, 1)
     get_node('../LevelComplete').initializeLevel(len(_levelData.get('car')), 2)
     
 func _createBoard(chapter: int, level: int) -> void:
