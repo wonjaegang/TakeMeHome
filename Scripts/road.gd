@@ -5,76 +5,75 @@ class_name Road
 ## - 도로의 방향 저장
 ##  - 차량이 들어오면 회전하도록 경로변경
 
-const SIGN_MOVE_DISTANCE: float = 32.0
-const SIGN_ANIM_DURATION: float = 1.2
-const SIGN_ANIM_INTERVAL: float = 0.4
+const SIGN_ANIMATION_DURATION: float = 1.0
+const SIGN_ANIMATION_INTERVAL: float = 0.2
+const SIGN_Y_GAP: float = 20.0
+const SIGN_MAX_DISTANCE: float = 800.0
 
 enum Direction {
     UP,
     DOWN,
 }
 var _direction: Direction
-var _signTweens: Array[Tween] = []
-var _signInitialPositions: Dictionary = {}
+var _sign_template_texture: Texture2D
+var _sign_template_scale: Vector2
+var _sign_start_pos: Vector2
+var _spawn_loop_tween: Tween
 
-@onready var _directionSignsParent: Node2D = $DirectionSigns
-    
+@onready var _direction_signs_parent: Node2D = $DirectionSigns
+
 func _ready() -> void:
     $CarEnterArea.body_entered.connect(_on_body_entered)
     
-    if _directionSignsParent:
-        for child in _directionSignsParent.get_children():
-            if child is Node2D:
-                _signInitialPositions[child] = child.position
-                child.modulate.a = 0.0
-                
+    # 템플릿 데이터 초기화
+    if _direction_signs_parent.get_child_count() > 0:
+        var signTemplate = _direction_signs_parent.get_child(0)
+        if signTemplate is Sprite2D:
+            _sign_template_texture = signTemplate.texture
+            _sign_template_scale = signTemplate.scale
+            _sign_start_pos = signTemplate.position
+            signTemplate.queue_free()            
+            
     _startSignAnimation()
 
 func setDirection(direction: String) -> void:
-    _direction = Direction.UP if direction == "up" else Direction.DOWN
-    _startSignAnimation()
+    _direction = Direction.UP if direction == "up" else Direction.DOWN    
     
 func getDirection() -> Direction:
     return _direction
 
 func _startSignAnimation() -> void:
-    for tween in _signTweens:
-        if tween: tween.kill()
-    _signTweens.clear()
-    
-    if not _directionSignsParent:
-        return
+    _spawn_sign(_sign_start_pos)
 
-    var signs = _directionSignsParent.get_children()
-    # 도로 자체를 회전시키므로 항상 로컬 좌표계 기준 아래(또는 위)로만 이동하면 됨
-    # 여기서는 아래쪽(Vector2.DOWN)으로 흐르도록 설정 (필요시 UP으로 변경)
-    var move_vector: Vector2 = Vector2.DOWN * SIGN_MOVE_DISTANCE
-        
-    for i in range(signs.size()):
-        var signSprite = signs[i]
-        if not signSprite is Node2D: continue
-        
-        var initial_pos = _signInitialPositions.get(signSprite)
-        if initial_pos == null: continue
-        
-        var tween = create_tween().set_loops()
-        _signTweens.append(tween)
-        
-        # 순차적 실행을 위한 초기 딜레이
-        tween.tween_interval(i * SIGN_ANIM_INTERVAL)
-        
-        # 초기화
-        tween.tween_callback(func():
-            signSprite.position = initial_pos
-            signSprite.modulate.a = 0.0
-        )
-        
-        # 애니메이션 (이동 + 깜빡임)
-        tween.set_parallel(true)
-        tween.tween_property(signSprite, "position", initial_pos + move_vector, SIGN_ANIM_DURATION)
-        tween.tween_property(signSprite, "modulate:a", 1.0, SIGN_ANIM_DURATION * 0.2).set_ease(Tween.EASE_OUT)
-        tween.tween_property(signSprite, "modulate:a", 0.0, SIGN_ANIM_DURATION * 0.2).set_delay(SIGN_ANIM_DURATION * 0.8).set_ease(Tween.EASE_IN)
-        tween.set_parallel(false)
+func _spawn_sign(pos: Vector2) -> void:
+    if not _direction_signs_parent: return
+
+    # 노드 생성
+    var sign_node = Sprite2D.new()
+    sign_node.texture = _sign_template_texture
+    sign_node.scale = _sign_template_scale
+    sign_node.position = pos
+    sign_node.modulate.a = 0.0 # 투명하게 시작
+    _direction_signs_parent.add_child(sign_node)
+    
+    # 1. 애니메이션 (깜빡임 후 삭제)
+    var anim_tween = create_tween()
+    anim_tween.tween_property(sign_node, "modulate:a", 1.0, SIGN_ANIMATION_DURATION * 0.3)
+    anim_tween.tween_property(sign_node, "modulate:a", 0.0, SIGN_ANIMATION_DURATION * 0.7)
+    anim_tween.tween_callback(sign_node.queue_free)
+    
+    # 2. 다음 노드 생성 스케줄링
+    _spawn_loop_tween = create_tween()
+    _spawn_loop_tween.tween_interval(SIGN_ANIMATION_INTERVAL)
+    _spawn_loop_tween.tween_callback(func():
+        var next_y = pos.y + SIGN_Y_GAP
+            
+        # 최대 거리 체크
+        if next_y - _sign_start_pos.y > SIGN_MAX_DISTANCE:
+            next_y = _sign_start_pos.y
+            
+        _spawn_sign(Vector2(pos.x, next_y))
+    )
 
 func _on_body_entered(body: Node2D) -> void:
     if body is not Car:

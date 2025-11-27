@@ -15,7 +15,7 @@ var _tween: Tween
 @onready var _touchButton: TextureButton = $TouchButton
 @onready var _systemCrossway: TileMapLayer = $TileMap/SystemCrossway
 @onready var _userCrossway: TileMapLayer = $TileMap/UserCrossway
-@onready var _roadOverlap: TileMapLayer = $TileMap/RoadOverlap
+@onready var _roadOverlap: Node2D = $TileMap/RoadOverlap
 @onready var _createPoint: TileMapLayer = $TileMap/CreatePoint
 @onready var _collisionAlert: MeshInstance2D = $CollisionAlert
 @onready var _collisionShape: CollisionShape2D = $CarEnterArea/CollisionShape2D

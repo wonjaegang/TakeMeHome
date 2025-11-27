@@ -22,16 +22,6 @@ position = Vector2(0, -400.00003)
 scale = Vector2(0.12626262, 0.12626262)
 texture = ExtResource("3_p0rql")
 
-[node name="DirectionSign2" type="Sprite2D" parent="DirectionSigns"]
-position = Vector2(0, -379.99997)
-scale = Vector2(0.12626262, 0.12626262)
-texture = ExtResource("3_p0rql")
-
-[node name="DirectionSign3" type="Sprite2D" parent="DirectionSigns"]
-position = Vector2(0, -359.99997)
-scale = Vector2(0.12626262, 0.12626262)
-texture = ExtResource("3_p0rql")
-
 [node name="CarEnterArea" type="Area2D" parent="."]
 visible = false
 

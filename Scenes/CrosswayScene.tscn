@@ -1002,8 +1002,16 @@ position = Vector2(0, 8)
 tile_map_data = PackedByteArray("AAD/////AgAAAAoAAAAAAP//AgAAAAoAAAABAP//AgAAAAoAAAD+////AgAAAAoAAAA=")
 tile_set = SubResource("TileSet_yme1q")
 
-[node name="RoadOverlap" type="TileMapLayer" parent="TileMap"]
-tile_map_data = PackedByteArray("AAD/////AgAAAAoAAAAAAP//AgAAAAoAAAABAP//AgAAAAoAAAD+////AgAAAAoAAAD8//7/AgAJABEAAAD8/wAAAgAJABEAAAADAAAAAgAJABEAAAADAP7/AgAJABEAAAD8////AgAJABAAAAADAP//AgAJABAAAAA=")
+[node name="RoadOverlap" type="Node2D" parent="TileMap"]
+
+[node name="RoadOverlapLeft" type="TileMapLayer" parent="TileMap/RoadOverlap"]
+position = Vector2(10, 0)
+tile_map_data = PackedByteArray("AAD/////AgAAAAoAAAAAAP//AgAAAAoAAAABAP//AgAAAAoAAAD+////AgAAAAoAAAD8//7/AgAJABAAAAD8////AgAJABAAAAD8/wAAAgAJABAAAAA=")
+tile_set = SubResource("TileSet_yme1q")
+
+[node name="RoadOverlapRight" type="TileMapLayer" parent="TileMap/RoadOverlap"]
+position = Vector2(-10, 0)
+tile_map_data = PackedByteArray("AAD/////AgAAAAoAAAAAAP//AgAAAAoAAAABAP//AgAAAAoAAAD+////AgAAAAoAAAADAP7/AgAJABEAAAADAP//AgAJABAAAAADAAAAAgAJABEAAAA=")
 tile_set = SubResource("TileSet_yme1q")
 
 [node name="SystemCrossway" type="TileMapLayer" parent="TileMap"]
